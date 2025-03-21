@@ -10,9 +10,9 @@ from model import *
 from torch import nn
 from torch.utils.data import DataLoader
 
-train_data = torchvision.datasets.CIFAR10(root="../data", train=True, transform=torchvision.transforms.ToTensor(),
+train_data = torchvision.datasets.CIFAR10(root="./dataset", train=True, transform=torchvision.transforms.ToTensor(),
                                           download=True)
-test_data = torchvision.datasets.CIFAR10(root="../data", train=False, transform=torchvision.transforms.ToTensor(),
+test_data = torchvision.datasets.CIFAR10(root="./dataset", train=False, transform=torchvision.transforms.ToTensor(),
                                          download=True)
 
 # length 长度
@@ -48,7 +48,7 @@ total_test_step = 0
 epoch = 10
 
 # 添加tensorboard
-writer = SummaryWriter("../logs_train")
+writer = SummaryWriter("logs")
 
 for i in range(epoch):
     print("-------第 {} 轮训练开始-------".format(i+1))

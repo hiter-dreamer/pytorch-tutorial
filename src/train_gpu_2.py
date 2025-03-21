@@ -11,11 +11,11 @@ from torch import nn
 from torch.utils.data import DataLoader
 
 # 定义训练的设备
-device = torch.device("cuda")
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-train_data = torchvision.datasets.CIFAR10(root="../data", train=True, transform=torchvision.transforms.ToTensor(),
+train_data = torchvision.datasets.CIFAR10(root="./dataset", train=True, transform=torchvision.transforms.ToTensor(),
                                           download=True)
-test_data = torchvision.datasets.CIFAR10(root="../data", train=False, transform=torchvision.transforms.ToTensor(),
+test_data = torchvision.datasets.CIFAR10(root="./dataset", train=False, transform=torchvision.transforms.ToTensor(),
                                          download=True)
 
 # length 长度
@@ -50,11 +50,11 @@ class Tudui(nn.Module):
         x = self.model(x)
         return x
 tudui = Tudui()
-tudui = tudui.to(device)
+tudui.to(device)
 
 # 损失函数
 loss_fn = nn.CrossEntropyLoss()
-loss_fn = loss_fn.to(device)
+loss_fn.to(device)
 # 优化器
 # learning_rate = 0.01
 # 1e-2=1 x (10)^(-2) = 1 /100 = 0.01
@@ -115,7 +115,7 @@ for i in range(epoch):
     writer.add_scalar("test_accuracy", total_accuracy/test_data_size, total_test_step)
     total_test_step = total_test_step + 1
 
-    torch.save(tudui, "tudui_{}.pth".format(i))
-    print("模型已保存")
+    # torch.save(tudui, "tudui_{}.pth".format(i))
+    # print("模型已保存")
 
 writer.close()

@@ -6,6 +6,7 @@ import torchvision
 from PIL import Image
 from torch import nn
 
+device=torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 image_path = "../imgs/airplane.png"
 image = Image.open(image_path)
 print(image)
@@ -35,9 +36,11 @@ class Tudui(nn.Module):
         x = self.model(x)
         return x
 
-model = torch.load("tudui_29_gpu.pth", map_location=torch.device('cpu'))
-print(model)
+model = torch.load("tudui_29_gpu.pth",weights_only=False)
+model.to(device)
+# print(model)
 image = torch.reshape(image, (1, 3, 32, 32))
+image=image.to(device)
 model.eval()
 with torch.no_grad():
     output = model(image)

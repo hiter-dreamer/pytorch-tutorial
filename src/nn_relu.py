@@ -14,7 +14,7 @@ input = torch.tensor([[1, -0.5],
 input = torch.reshape(input, (-1, 1, 2, 2))
 print(input.shape)
 
-dataset = torchvision.datasets.CIFAR10("../data", train=False, download=True,
+dataset = torchvision.datasets.CIFAR10(root="./dataset", train=False, download=True,
                                        transform=torchvision.transforms.ToTensor())
 
 dataloader = DataLoader(dataset, batch_size=64)
@@ -31,7 +31,7 @@ class Tudui(nn.Module):
 
 tudui = Tudui()
 
-writer = SummaryWriter("../logs_relu")
+writer = SummaryWriter("logs")
 step = 0
 for data in dataloader:
     imgs, targets = data

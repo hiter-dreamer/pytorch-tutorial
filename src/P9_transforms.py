@@ -1,7 +1,9 @@
+import torch
 from torch.utils.data import Dataset, DataLoader
 from PIL import Image
 import os
 from torchvision import transforms
+import matplotlib.pyplot as plt
 
 class MyData(Dataset):
 
@@ -39,7 +41,7 @@ class MyData(Dataset):
 
 
 transform = transforms.Compose([transforms.Resize(400), transforms.ToTensor()])
-root_dir = "dataset/train"
+root_dir = "exercise_data/train"
 image_ants = "ants_image"
 label_ants = "ants_label"
 ants_dataset = MyData(root_dir, image_ants, label_ants, transform=transform)
@@ -47,6 +49,18 @@ image_bees = "bees_image"
 label_bees = "bees_label"
 bees_dataset = MyData(root_dir, image_bees, label_bees, transform=transform)
 
+# 获取第一个样本
+img, label = ants_dataset[0]
+print(img.shape)  # 输出: torch.Size([3, 400, 600])
+print(label)      # 输出: 标签内容
+# 如果图片是张量，需要转换为 PIL 图像或 numpy 数组
+if isinstance(img, torch.Tensor):
+    img = transforms.ToPILImage()(img)  # 将张量转换为 PIL 图像
+
+plt.imshow(img)
+plt.title(f"Label: {label}")
+plt.axis("off")  # 关闭坐标轴
+plt.show()
 
 
 

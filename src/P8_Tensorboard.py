@@ -3,7 +3,7 @@ import numpy as np
 from PIL import Image
 
 writer = SummaryWriter("logs")
-image_path = "data/train/ants_image/6240329_72c01e663e.jpg"
+image_path = "hymenoptera_data/train/ants/0013035.jpg"
 img_PIL = Image.open(image_path)
 img_array = np.array(img_PIL)
 print(type(img_array))

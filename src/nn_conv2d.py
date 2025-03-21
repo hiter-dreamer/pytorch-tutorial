@@ -8,7 +8,7 @@ from torch.nn import Conv2d
 from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 
-dataset = torchvision.datasets.CIFAR10("../data", train=False, transform=torchvision.transforms.ToTensor(),
+dataset = torchvision.datasets.CIFAR10(root="./dataset", train=False, transform=torchvision.transforms.ToTensor(),
                                        download=True)
 dataloader = DataLoader(dataset, batch_size=64)
 
@@ -23,7 +23,7 @@ class Tudui(nn.Module):
 
 tudui = Tudui()
 
-writer = SummaryWriter("../logs")
+writer = SummaryWriter("logs")
 
 step = 0
 for data in dataloader:

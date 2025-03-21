@@ -8,7 +8,7 @@ from torch.nn import Sequential, Conv2d, MaxPool2d, Flatten, Linear
 from torch.optim.lr_scheduler import StepLR
 from torch.utils.data import DataLoader
 
-dataset = torchvision.datasets.CIFAR10("../data", train=False, transform=torchvision.transforms.ToTensor(),
+dataset = torchvision.datasets.CIFAR10(root="./dataset", train=False, transform=torchvision.transforms.ToTensor(),
                                        download=True)
 
 dataloader = DataLoader(dataset, batch_size=1)
